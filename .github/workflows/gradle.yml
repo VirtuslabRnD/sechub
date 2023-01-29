@@ -15,8 +15,15 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
     steps:
+      - name: Install missing MacOS library
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: brew install coreutils
       - uses: actions/checkout@v3
       - name: Set up JDK 11
         uses: actions/setup-java@v3
@@ -65,7 +72,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: combined-sechub-testreport
+          name: combined-sechub-testreport-${{ matrix.os }}
           path: build/reports/combined-report
           retention-days: 14
 
@@ -73,7 +80,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: sechub-server
+          name: sechub-server-${{ matrix.os }}
           path: sechub-server/build/libs
           retention-days: 14
 
@@ -81,21 +88,21 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: sechub-pds
+          name: sechub-pds-${{ matrix.os }}
           path: sechub-pds/build/libs
           
       - name: Archive pds tools artifacts
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: sechub-pds-tools
+          name: sechub-pds-tools-${{ matrix.os }}
           path: sechub-pds-tools/build/libs
 
       - name: Archive developer tools artifacts
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: sechub-developertools
+          name: sechub-developertools-${{ matrix.os }}
           path: sechub-developertools/build/libs
           retention-days: 14
 
@@ -103,7 +110,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: sechub-client
+          name: sechub-client-${{ matrix.os }}
           path: sechub-cli/build/go
           retention-days: 14
 
@@ -122,20 +129,20 @@ jobs:
       - name: Archive documentation HTML
         uses: actions/upload-artifact@v3
         with:
-          name: sechub-docs-html
+          name: sechub-docs-html-${{ matrix.os }}
           path: sechub-doc/build/docs/final-html/
           retention-days: 14
 
       - name: Archive documentation PDF
         uses: actions/upload-artifact@v3
         with:
-          name: sechub-docs-pdf
+          name: sechub-docs-pdf-${{ matrix.os }}
           path: sechub-doc/build/docs/asciidoc/*.pdf
           retention-days: 14
 
       - name: Archive documentation openAPI3
         uses: actions/upload-artifact@v3
         with:
-          name: sechub-api-spec
+          name: sechub-api-spec-${{ matrix.os }}
           path: sechub-doc/build/api-spec/
           retention-days: 14
