@@ -28,9 +28,9 @@ public class ResilientActionExecutorTest {
     }
 
     @Test
-    public void fall_through_200_ms__inside_time_frame_same_exception_will_be_returned_after_this_real_call_done() throws Exception {
+    public void fall_through_500_ms__inside_time_frame_same_exception_will_be_returned_after_this_real_call_done() throws Exception {
         /* prepare */
-        long millisToFallThrough = 200;
+        long millisToFallThrough = 500;
 
         action.throwables.add(new IllegalArgumentException("first-to-reuse")); // one exception only, so second try will return result
         action.result.text = "OK";

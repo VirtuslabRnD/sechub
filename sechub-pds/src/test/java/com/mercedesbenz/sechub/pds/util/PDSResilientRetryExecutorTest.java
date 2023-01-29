@@ -196,12 +196,12 @@ class PDSResilientRetryExecutorTest {
     }
 
     @Test
-    void when_runtime_exception_is_defined_as_handled_a_illegal_state_exception__happening_1_times_but_5_retry_execution_is_done_waittime_40ms()
+    void when_runtime_exception_is_defined_as_handled_a_illegal_state_exception__happening_1_times_but_5_retry_execution_is_done_waittime_400ms()
             throws Exception {
         /* prepare */
-        int waitTime = 40;
-        int allowedMinimumMillisecondsForExecution = 40;
-        int allowedMaximumMillisecondsForExecution = 70;
+        int waitTime = 400;
+        int allowedMinimumMillisecondsForExecution = 400;
+        int allowedMaximumMillisecondsForExecution = 700;
 
         PDSResilientRetryExecutor<TestTargetException> executorToTest = new PDSResilientRetryExecutor<>(5, thrower, RuntimeException.class);
         executorToTest.setMilliSecondsToWaiBeforeRetry(waitTime);

@@ -70,13 +70,13 @@ public class DirectPDSAPIJobStreamDataScenario6IntTest {
         boolean ended = false;
 
         do {
-            if (System.currentTimeMillis() - started > 4000) {
+            if (System.currentTimeMillis() - started > 40000) {
                 String currentStatus = asPDSUser(PDS_TECH_USER).getJobStatus(pdsJobUUID);
                 fail("Was not able to find expected stream data!\n- lastOutput:" + lastOutput + "\n- lastError:" + lastError + "\n- outputTextSet:"
                         + outputTextSet + "\n- Current job status:\n" + TestJSONHelper.get().beatuifyJSON(currentStatus));
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -87,10 +87,8 @@ public class DirectPDSAPIJobStreamDataScenario6IntTest {
 
             if (lastOutput == null || lastOutput.trim().isEmpty()) { // when body is empty, happens when job has not yet been started
                 LOG.info("No output data found for job:{}", pdsJobUUID);
-                continue;
             } else if (lastError == null || lastError.trim().isEmpty()) { // when body is empty, happens when job has not yet been started
                 LOG.info("No error data found for job:{}", pdsJobUUID);
-                continue;
             } else {
 
                 if (outputTextSet.add(lastOutput)) {

@@ -112,17 +112,17 @@ public class RetryContextText {
     }
 
     @Test
-    public void _2_retries_done_with_time_to_wait_10ms_waits_not_longer_than_50_ms() {
+    public void _2_retries_done_with_time_to_wait_100ms_waits_not_longer_than_500_ms() {
         /* prepare */
         RetryContext retryToTest = new RetryContext(2);
-        retryToTest.setRetryTimeToWait(10);
+        retryToTest.setRetryTimeToWait(100);
         long time1 = System.currentTimeMillis();
         retryToTest.executionFailed();
         retryToTest.executionFailed();
         long elapsed = System.currentTimeMillis() - time1;
 
         /* execute / test */
-        assertTrue("Time elapsed:" + elapsed, elapsed <= 50);
+        assertTrue("Time elapsed:" + elapsed, elapsed <= 500);
     }
 
     @Test
