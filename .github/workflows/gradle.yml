@@ -68,6 +68,14 @@ jobs:
       # -----------------------------------------
       # Upload Build Artifacts
       # -----------------------------------------
+      - name: Archive integration test report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: sechub-integrationtestreport-${{ matrix.os }}
+          path: sechub-integrationtest/build/reports/tests/integrationtest
+          retention-days: 14
+
       - name: Archive combined test report
         if: always()
         uses: actions/upload-artifact@v3
