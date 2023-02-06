@@ -98,6 +98,8 @@ spec:
             name: tmp-volume
 {{- end }}
         env:
+        - name: SECHUB_START_MODE
+          value: "localserver"
         # Server profile definition
         - name: SPRING_PROFILES_ACTIVE
           value: "{{ .Values.server.spring.profiles }}"
@@ -108,6 +110,8 @@ spec:
 # + File upload definitions
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
         - name: SPRING_SERVLET_MULTIPART_MAX-FILE-SIZE
+          value: "{{ .Values.server.uploads.sources.maxUploadSize }}"
+        - name: SECHUB_MAX_FILE_UPLOAD_SIZE
           value: "{{ .Values.server.uploads.sources.maxUploadSize }}"
         - name: SPRING_SERVLET_MULTIPART_MAX-REQUEST-SIZE
           value: "{{ .Values.server.uploads.sources.maxUploadSize }}"
@@ -160,8 +164,10 @@ spec:
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 # + Initial user setup
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
-        - name: SECHUB_INITIALADMIN_USERID
+        - name: ADMIN_USERID
           value: {{ .Values.server.initialAdminUser.id }}
+        - name: ADMIN_APITOKEN
+          value: "myapitoken"
         - name: SECHUB_INITIALADMIN_EMAIL
           value: {{ .Values.server.initialAdminUser.email }}
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #

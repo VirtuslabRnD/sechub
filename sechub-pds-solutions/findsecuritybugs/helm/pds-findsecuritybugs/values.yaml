@@ -23,7 +23,7 @@ pds:
             size: "1Gi"
     startMode: localserver
     javaDebug:
-        enabled: false
+        enabled: true
     keepContainerAliveAfterPDSCrashed: false
     maxFileUploadSize: 20MB
     heartbeatLogging: "true"
@@ -35,8 +35,10 @@ pds:
 users:
     technical:
         id: "techuser"
+        apiToken: "{noop}myapitoken"
     admin:
         id: "admin"
+        apiToken: "{noop}myapitoken"
 
 storage:
     local:

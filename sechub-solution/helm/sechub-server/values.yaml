@@ -37,7 +37,7 @@ server:
   # !              As soon as you deploy a cluster, you must set up a shared database.
   # Put the database user id  in k8s secret secret-database:spring_datasource_username
   # Put the database password in k8s secret secret-database:spring_datasource_password
-  databaseConnection: "jdbc:postgresql://postgres-db:5432/sechub"
+ # databaseConnection: "jdbc:postgresql://postgres-db:5432/sechub"
   # Configure emails sent from SecHub server:
   email:
     from: sechub@to.be.defined
@@ -47,7 +47,7 @@ server:
       port: 25
   initialAdminUser:
     # Define initial admin user. The link to get the api token will be sent to this email address.
-    id: sechubadm
+    id: admin
     email: mail@to.be.defined
   jobScheduling:
     # Job scheduling is activated in intervals (2000=every 2s)

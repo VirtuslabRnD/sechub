@@ -7,7 +7,7 @@
         "baseURL": "https://pds-findsecuritybugs:8444",
         "credentials": {
             "user": "techuser",
-            "password": "pds-apitoken"
+            "password": "myapitoken"
         },
         "jobParameters": [
             {
