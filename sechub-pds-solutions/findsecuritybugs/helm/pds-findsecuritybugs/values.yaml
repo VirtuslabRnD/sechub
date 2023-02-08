@@ -23,7 +23,7 @@ pds:
             size: "1Gi"
     startMode: localserver
     javaDebug:
-        enabled: true
+        enabled: false
     keepContainerAliveAfterPDSCrashed: false
     maxFileUploadSize: 20MB
     heartbeatLogging: "true"
